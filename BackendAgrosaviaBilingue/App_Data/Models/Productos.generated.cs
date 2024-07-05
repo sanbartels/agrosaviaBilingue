@@ -19,58 +19,51 @@ using Umbraco.ModelsBuilder.Embedded;
 
 namespace Umbraco.Web.PublishedModels
 {
-	/// <summary>Inicio</summary>
-	[PublishedModel("inicio")]
-	public partial class Inicio : PublishedContentModel, IMenu
+	/// <summary>Productos</summary>
+	[PublishedModel("productos")]
+	public partial class Productos : PublishedContentModel, IMenu
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		public new const string ModelTypeAlias = "inicio";
+		public new const string ModelTypeAlias = "productos";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
 		public new static IPublishedContentType GetModelContentType()
 			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Inicio, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Productos, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 #pragma warning restore 0109
 
 		// ctor
-		public Inicio(IPublishedContent content)
+		public Productos(IPublishedContent content)
 			: base(content)
 		{ }
 
 		// properties
 
 		///<summary>
-		/// Lema
+		/// Imagen de fondo
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("lema")]
-		public virtual string Lema => this.Value<string>("lema");
+		[ImplementPropertyType("imagenDeFondo")]
+		public virtual global::Umbraco.Core.Models.MediaWithCrops ImagenDeFondo => this.Value<global::Umbraco.Core.Models.MediaWithCrops>("imagenDeFondo");
 
 		///<summary>
-		/// Listado Banners home
+		/// Titulo seccion en inicio
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("listadoBannersHome")]
-		public virtual global::Umbraco.Core.Models.Blocks.BlockListModel ListadoBannersHome => this.Value<global::Umbraco.Core.Models.Blocks.BlockListModel>("listadoBannersHome");
+		[ImplementPropertyType("tituloSeccionEnInicio")]
+		public virtual string TituloSeccionEnInicio => this.Value<string>("tituloSeccionEnInicio");
 
 		///<summary>
-		/// Nombre del sitio
+		/// Titulo seccion interna
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("nombreDelSitio")]
-		public virtual string NombreDelSitio => this.Value<string>("nombreDelSitio");
-
-		///<summary>
-		/// Titulo principal
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("tituloPrincipal")]
-		public virtual string TituloPrincipal => this.Value<string>("tituloPrincipal");
+		[ImplementPropertyType("tituloSeccionInterna")]
+		public virtual string TituloSeccionInterna => this.Value<string>("tituloSeccionInterna");
 
 		///<summary>
 		/// MostrarEnMenu

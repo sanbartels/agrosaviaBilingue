@@ -19,71 +19,50 @@ using Umbraco.ModelsBuilder.Embedded;
 
 namespace Umbraco.Web.PublishedModels
 {
-	/// <summary>Inicio</summary>
-	[PublishedModel("inicio")]
-	public partial class Inicio : PublishedContentModel, IMenu
+	/// <summary>PQRS</summary>
+	[PublishedModel("pQRS")]
+	public partial class PQrs : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		public new const string ModelTypeAlias = "inicio";
+		public new const string ModelTypeAlias = "pQRS";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
 		public new static IPublishedContentType GetModelContentType()
 			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Inicio, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<PQrs, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 #pragma warning restore 0109
 
 		// ctor
-		public Inicio(IPublishedContent content)
+		public PQrs(IPublishedContent content)
 			: base(content)
 		{ }
 
 		// properties
 
 		///<summary>
-		/// Lema
+		/// Descripcion seccion
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("lema")]
-		public virtual string Lema => this.Value<string>("lema");
+		[ImplementPropertyType("descripcionSeccion")]
+		public virtual global::System.Web.IHtmlString DescripcionSeccion => this.Value<global::System.Web.IHtmlString>("descripcionSeccion");
 
 		///<summary>
-		/// Listado Banners home
+		/// Subtitulo descripcion
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("listadoBannersHome")]
-		public virtual global::Umbraco.Core.Models.Blocks.BlockListModel ListadoBannersHome => this.Value<global::Umbraco.Core.Models.Blocks.BlockListModel>("listadoBannersHome");
+		[ImplementPropertyType("subtituloDescripcion")]
+		public virtual string SubtituloDescripcion => this.Value<string>("subtituloDescripcion");
 
 		///<summary>
-		/// Nombre del sitio
+		/// Titulo interno seccion
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("nombreDelSitio")]
-		public virtual string NombreDelSitio => this.Value<string>("nombreDelSitio");
-
-		///<summary>
-		/// Titulo principal
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("tituloPrincipal")]
-		public virtual string TituloPrincipal => this.Value<string>("tituloPrincipal");
-
-		///<summary>
-		/// MostrarEnMenu
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("mostrarEnMenu")]
-		public virtual bool MostrarEnMenu => global::Umbraco.Web.PublishedModels.Menu.GetMostrarEnMenu(this);
-
-		///<summary>
-		/// Titulo
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("titulo")]
-		public virtual string Titulo => global::Umbraco.Web.PublishedModels.Menu.GetTitulo(this);
+		[ImplementPropertyType("tituloInternoSeccion")]
+		public virtual string TituloInternoSeccion => this.Value<string>("tituloInternoSeccion");
 	}
 }
