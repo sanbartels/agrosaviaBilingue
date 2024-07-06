@@ -18,6 +18,8 @@
     Html.RequiresJs("/static/lib/owlcarousel/owl.carousel.min.js", 4);
     Html.RequiresJs("/static/js/main.js", 5);
 
+    var home = (Inicio)Model.Root();
+
     
 }
 
@@ -25,7 +27,7 @@
 <html lang="es">
 <head>
     <meta charset="utf-8" />
-    <title>Fruitables - Vegetable Website Template</title>
+    <title>@home.TituloPrincipal</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="keywords" />
     <meta content="" name="description" />
