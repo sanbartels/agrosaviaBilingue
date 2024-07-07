@@ -20,7 +20,7 @@
 
     var home = (Inicio)Model.Root();
 
-    
+
 }
 
 <!DOCTYPE html>
@@ -49,7 +49,7 @@
     <div class="container-fluid fixed-top">
         <div class="container">
             <a href="index.html" class="navbar-brand">
-                <h1 class="text-primary display-6 text-center">Fruitables</h1>
+                <h1 class="text-primary display-6 text-center">@home.NombreDelSitio</h1>
             </a>
         </div>
         <div class="container px-0">
@@ -61,28 +61,37 @@
                     <span class="fa fa-bars text-primary"></span>
                 </button>
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                    <div class="navbar-nav mx-auto">
-                        <a href="index.html" class="nav-item nav-link active">Inicio</a>
-                        <a href="productos.html" class="nav-item nav-link">Productos</a>
-                        <a href="pqrs.html" class="nav-item nav-link">PQRS</a>
-                    </div>
+
+                    @Html.Partial("~/views/partials/Menu.cshtml")
+
                     <div class="d-flex m-3 me-0">
                         <div class="col-3 col-lg-5 col-xl-1 col-xxl-2 bg-top_gov p-0">
                             <div class="select_languages_container p-0">
-                                <a href="" class="btn_language">
-                                    <p class="language_name m-0">EN</p>
-                                    <img class="language_img"
-                                         src="img/reino-unido.png"
-                                         height="12px"
-                                         alt="Bandera idioma ingles" />
-                                </a>
-                                <a href="" class="btn_language active">
-                                    <p class="language_name m-0">ES</p>
-                                    <img class="language_img"
-                                         src="img/mundo.png"
-                                         height="12px"
-                                         alt="Bandera idioma español" />
-                                </a>
+                                @foreach (var (culture, infos) in Model.Cultures)
+                                {
+                                    switch (culture.ToLower())
+                                    {
+                                        case "es":
+                                            <a href="@Model.Url(culture)" class="btn_language @(Model.GetCultureFromDomains().ToLower()==culture.ToLower() ? "active":String.Empty)">
+                                                <p class="language_name m-0">ES</p>
+                                                <img class="language_img"
+                                                     src="~/static/img/lang/es.png"
+                                                     height="12px"
+                                                     alt="Bandera idioma español" />
+                                            </a>
+                                            break;
+
+                                        case "en-us":
+                                            <a href="@Model.Url(culture)" class="btn_language @(Model.GetCultureFromDomains().ToLower()==culture.ToLower() ? "active":String.Empty)">
+                                                <p class="language_name m-0">EN</p>
+                                                <img class="language_img"
+                                                     src="~/static/img/lang/en.png"
+                                                     height="12px"
+                                                     alt="Bandera idioma ingles" />
+                                            </a>
+                                            break;
+                                    }
+                                }
                             </div>
                         </div>
                         <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
@@ -100,7 +109,7 @@
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Búsqueda</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">@Umbraco.GetDictionaryValue("busqueda")</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex align-items-center">
@@ -118,15 +127,14 @@
 
     @RenderBody()
 
-
     <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
         <div class="container py-5">
             <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5)">
                 <div class="row g-4">
                     <div class="col-lg-9 col-sm-12">
                         <a href="#">
-                            <h1 class="text-primary mb-0">Fruitables</h1>
-                            <p class="text-secondary mb-0">Fresh products</p>
+                            <h1 class="text-primary mb-0">@home.NombreDelSitio</h1>
+                            <p class="text-secondary mb-0">@home.Lema</p>
                         </a>
                     </div>
                     

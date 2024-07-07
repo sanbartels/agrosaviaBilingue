@@ -27,9 +27,9 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
 		bool MostrarEnMenu { get; }
 
-		/// <summary>Titulo</summary>
+		/// <summary>Nombre en menu</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		string Titulo { get; }
+		string NombreEnMenu { get; }
 	}
 
 	/// <summary>Menu</summary>
@@ -69,14 +69,14 @@ namespace Umbraco.Web.PublishedModels
 		public static bool GetMostrarEnMenu(IMenu that) => that.Value<bool>("mostrarEnMenu");
 
 		///<summary>
-		/// Titulo
+		/// Nombre en menu
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("titulo")]
-		public virtual string Titulo => GetTitulo(this);
+		[ImplementPropertyType("nombreEnMenu")]
+		public virtual string NombreEnMenu => GetNombreEnMenu(this);
 
-		/// <summary>Static getter for Titulo</summary>
+		/// <summary>Static getter for Nombre en menu</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		public static string GetTitulo(IMenu that) => that.Value<string>("titulo");
+		public static string GetNombreEnMenu(IMenu that) => that.Value<string>("nombreEnMenu");
 	}
 }

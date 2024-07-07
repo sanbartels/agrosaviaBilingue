@@ -21,7 +21,7 @@ namespace Umbraco.Web.PublishedModels
 {
 	/// <summary>PQRS</summary>
 	[PublishedModel("pQRS")]
-	public partial class PQrs : PublishedContentModel
+	public partial class PQrs : PublishedContentModel, IMenu
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -52,6 +52,13 @@ namespace Umbraco.Web.PublishedModels
 		public virtual global::System.Web.IHtmlString DescripcionSeccion => this.Value<global::System.Web.IHtmlString>("descripcionSeccion");
 
 		///<summary>
+		/// Listado pqrs
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
+		[ImplementPropertyType("listadoPqrs")]
+		public virtual global::Umbraco.Core.Models.Blocks.BlockListModel ListadoPqrs => this.Value<global::Umbraco.Core.Models.Blocks.BlockListModel>("listadoPqrs");
+
+		///<summary>
 		/// Subtitulo descripcion
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
@@ -64,5 +71,19 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
 		[ImplementPropertyType("tituloInternoSeccion")]
 		public virtual string TituloInternoSeccion => this.Value<string>("tituloInternoSeccion");
+
+		///<summary>
+		/// MostrarEnMenu
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
+		[ImplementPropertyType("mostrarEnMenu")]
+		public virtual bool MostrarEnMenu => global::Umbraco.Web.PublishedModels.Menu.GetMostrarEnMenu(this);
+
+		///<summary>
+		/// Nombre en menu
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
+		[ImplementPropertyType("nombreEnMenu")]
+		public virtual string NombreEnMenu => global::Umbraco.Web.PublishedModels.Menu.GetNombreEnMenu(this);
 	}
 }

@@ -73,10 +73,10 @@ namespace Umbraco.Web.PublishedModels
 		public virtual bool MostrarEnMenu => global::Umbraco.Web.PublishedModels.Menu.GetMostrarEnMenu(this);
 
 		///<summary>
-		/// Titulo
+		/// Nombre en menu
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
-		[ImplementPropertyType("titulo")]
-		public virtual string Titulo => global::Umbraco.Web.PublishedModels.Menu.GetTitulo(this);
+		[ImplementPropertyType("nombreEnMenu")]
+		public virtual string NombreEnMenu => global::Umbraco.Web.PublishedModels.Menu.GetNombreEnMenu(this);
 	}
 }

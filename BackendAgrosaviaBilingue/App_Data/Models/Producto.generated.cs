@@ -59,6 +59,13 @@ namespace Umbraco.Web.PublishedModels
 		public virtual global::System.Web.IHtmlString DescripcionProducto => this.Value<global::System.Web.IHtmlString>("descripcionProducto");
 
 		///<summary>
+		/// Imagen
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
+		[ImplementPropertyType("imagen")]
+		public virtual global::Umbraco.Core.Models.MediaWithCrops Imagen => this.Value<global::Umbraco.Core.Models.MediaWithCrops>("imagen");
+
+		///<summary>
 		/// Nombre producto
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]

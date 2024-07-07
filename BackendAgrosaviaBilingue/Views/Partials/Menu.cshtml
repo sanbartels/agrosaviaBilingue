@@ -1,0 +1,22 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@{
+    var urlActual = Model.Url();
+
+    // Get basic design settings from the homepage
+    var home = (Inicio)Model.Root();
+}
+
+<div class="navbar-nav mx-auto">
+    @if (home.MostrarEnMenu && !home.NombreEnMenu.IsNullOrWhiteSpace())
+    {
+        <a class="nav-item nav-link @(urlActual.Equals("/") ? "active" : "")" href="@home.Url()">@home.NombreEnMenu.Trim()</a>
+    }
+
+    @foreach (var item in home.Children.Where(x => x.IsVisible()))
+    {
+        if (item.HasValue("nombreEnMenu") && item.ContentType.Alias != "siteMap")
+        {
+            <a href="@item.Url()" class="nav-item nav-link @(urlActual.Contains(item.Url()) ? "active" : "")">@item.GetProperty("nombreEnMenu").Value().ToString().Trim()</a>
+        }
+    }
+</div>

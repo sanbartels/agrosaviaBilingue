@@ -321,6 +321,8 @@
     <Content Include="Global.asax" />
     <Content Include="static\css\bootstrap.min.css" />
     <Content Include="static\css\style.css" />
+    <Content Include="static\img\lang\en.png" />
+    <Content Include="static\img\lang\es.png" />
     <Content Include="static\js\main.js" />
     <Content Include="static\lib\easing\easing.js" />
     <Content Include="static\lib\easing\easing.min.js" />
@@ -393,6 +395,7 @@
     <Content Include="Views\Producto.cshtml" />
     <Content Include="Views\Productos.cshtml" />
     <Content Include="static\lib\owlcarousel\LICENSE" />
+    <Content Include="Views\Partials\Menu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
