@@ -12,14 +12,15 @@
     Html.RequiresCss("~/static/css/bootstrap.min.css", 3);
     Html.RequiresCss("~/static/css/style.css", 4);
 
-    Html.RequiresJs("/static/lib/easing/easing.min.js", 1);
-    Html.RequiresJs("/static/lib/waypoints/waypoints.min.js", 2);
-    Html.RequiresJs("/static/lib/lightbox/js/lightbox.min.js", 3);
-    Html.RequiresJs("/static/lib/owlcarousel/owl.carousel.min.js", 4);
-    Html.RequiresJs("/static/js/main.js", 5);
+    Html.RequiresJs("/static/js/jquery.js", 1);
+    Html.RequiresJs("/static/lib/easing/easing.min.js", 2);
+    Html.RequiresJs("/static/lib/waypoints/waypoints.min.js", 3);
+    Html.RequiresJs("/static/lib/lightbox/js/lightbox.min.js", 4);
+    Html.RequiresJs("/static/lib/owlcarousel/owl.carousel.min.js", 5);
+    Html.RequiresJs("/static/js/main.js", 6);
 
     var home = (Inicio)Model.Root();
-
+    string textSearch = Request.QueryString["q"] != null ? Request.QueryString["q"].Trim() : String.Empty;
 
 }
 
@@ -114,11 +115,15 @@
                 </div>
                 <div class="modal-body d-flex align-items-center">
                     <div class="input-group w-75 mx-auto d-flex">
-                        <input type="search"
-                               class="form-control p-3"
-                               placeholder="Ingresa tu busqueda"
-                               aria-describedby="search-icon-1" />
-                        <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        <form action="/buscar?q=" id="formSearch">
+                            <input type="search"
+                                   id="textSearch"
+                                   value="@textSearch"
+                                   class="form-control p-3"
+                                   placeholder="@Umbraco.GetDictionaryValue("placeholder_buscador")"
+                                   aria-describedby="search-icon-1" />
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -137,7 +142,7 @@
                             <p class="text-secondary mb-0">@home.Lema</p>
                         </a>
                     </div>
-                    
+
                     <div class="col-lg-3 col-sm-12">
                         <div class="d-flex justify-content-end pt-3">
                             <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="">
@@ -169,5 +174,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
     @Html.RenderJsHere()
+    @if (IsSectionDefined("js"))
+    {
+        @RenderSection("js", false)
+    }
 </body>
 </html>
