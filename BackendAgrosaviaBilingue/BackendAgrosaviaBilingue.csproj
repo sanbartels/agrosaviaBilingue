@@ -328,6 +328,7 @@
     <Content Include="static\css\style.css" />
     <Content Include="static\img\lang\en.png" />
     <Content Include="static\img\lang\es.png" />
+    <Content Include="static\js\jquery.js" />
     <Content Include="static\js\main.js" />
     <Content Include="static\lib\easing\easing.js" />
     <Content Include="static\lib\easing\easing.min.js" />

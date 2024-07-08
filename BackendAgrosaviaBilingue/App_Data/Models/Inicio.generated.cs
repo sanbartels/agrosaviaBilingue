@@ -45,6 +45,13 @@ namespace Umbraco.Web.PublishedModels
 		// properties
 
 		///<summary>
+		/// Imagen fondo header
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
+		[ImplementPropertyType("imagenFondoHeader")]
+		public virtual global::Umbraco.Core.Models.MediaWithCrops ImagenFondoHeader => this.Value<global::Umbraco.Core.Models.MediaWithCrops>("imagenFondoHeader");
+
+		///<summary>
 		/// Lema
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]

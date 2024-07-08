@@ -9,7 +9,7 @@
     var productos = (Productos)home.Children<Productos>().Where(x => x.IsVisible()).FirstOrDefault();
 }
 
-<div class="container-fluid py-5 mb-5 hero-header">
+<div class="container-fluid hero-header" style="background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1)), url(@home.ImagenFondoHeader.Url()); background-position: center center; background-repeat: no-repeat; background-size: cover;">
     <div class="container py-5">
         <div class="row g-5 align-items-center">
             <div class="col-md-12 col-lg-7">

@@ -52,6 +52,13 @@ namespace Umbraco.Web.PublishedModels
 		public virtual global::System.Web.IHtmlString DescripcionSeccion => this.Value<global::System.Web.IHtmlString>("descripcionSeccion");
 
 		///<summary>
+		/// Imagen de fondo pqrs
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
+		[ImplementPropertyType("imagenDeFondoPqrs")]
+		public virtual global::Umbraco.Core.Models.MediaWithCrops ImagenDeFondoPqrs => this.Value<global::Umbraco.Core.Models.MediaWithCrops>("imagenDeFondoPqrs");
+
+		///<summary>
 		/// Listado pqrs
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
