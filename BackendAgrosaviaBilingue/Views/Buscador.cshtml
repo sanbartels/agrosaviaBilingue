@@ -29,7 +29,7 @@
                             terms = terms.Where(x => !Lucene.Net.Analysis.StopAnalyzer.ENGLISH_STOP_WORDS_SET.Contains(x.ToLower()) && x.Length > 2).ToArray(); //no distinguimos entre mayus y mins
 
                             // Campos en español
-                            var camposImportantesEs = new List<string> { "titulo", "lema", "nombreDelSitio","tituloPrincipal", "nodeName", "nombreProducto", "categoria", "tituloSeccionEnInicio", "tituloSeccionInterna", "tituloInternoSeccion", "subtituloDescripcion", "nombreEnMenu", "nombreDeLaSeccion", "listadoPqrs" };
+                            var camposImportantesEs = new List<string> { "titulo", "nombre", "textoOferta", "lema", "nombreDelSitio","tituloPrincipal", "nodeName", "nombreProducto", "categoria", "tituloSeccionEnInicio", "tituloSeccionInterna", "tituloInternoSeccion", "subtituloDescripcion", "nombreEnMenu", "nombreDeLaSeccion", "listadoPqrs" };
                             var camposImportantesEsSufijo = camposImportantesEs.Select(campo => campo + "_es").ToList();
 
                             var camposBusquedaDifusaEs = new List<string> { "resumenProducto", "descripcionProducto", "contenidoInterno", "descripcionSeccion", "pregunta", "respuesta", "subtituloDescripcion", "descripcionSeccion", "listadoPqrs" };
