@@ -1,0 +1,43 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.PQrs>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "Master.cshtml";
+    var pqrs = (PQrs)Model;
+    int contadorPreguntas = 1;
+}
+
+<div class="container-fluid page-header py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(@pqrs.ImagenDeFondoPqrs.Url()); background-position: center center; background-repeat: no-repeat; background-size: cover;">
+    <h1 class="text-center text-white display-6">@pqrs.SubtituloDescripcion</h1>
+</div>
+
+<div class="container-fluid py-5 mt-5">
+    <div class="container py-5">
+        <div class="row g-4 mb-5">
+            <div class="col-lg-12">
+                <div class="row g-4">
+                    <div class="col-12">
+                        @pqrs.DescripcionSeccion
+                    </div>
+
+                    <div class="wrap">
+                        <section class="question-section">
+
+                            @foreach (ItemPqr preg_item in pqrs.ListadoPqrs.Select(x => x.Content).OfType<ItemPqr>().ToList())
+                            {
+                                <div class="cat-@contadorPreguntas">
+                                    <input id="tab-@contadorPreguntas" type="radio" name="tabs" tabindex="@contadorPreguntas" />
+                                    <label for="tab-@contadorPreguntas">@preg_item.Pregunta</label>
+
+                                    <div class="question-wrap">
+                                        @preg_item.Respuesta
+                                    </div>
+                                </div>
+                                contadorPreguntas++;
+                            }
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
