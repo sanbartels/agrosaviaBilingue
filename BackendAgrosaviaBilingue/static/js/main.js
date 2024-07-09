@@ -97,11 +97,12 @@
 })(jQuery);
 
 $(document).ready(function () {
+    var url = "@urlBuscador";
 
     $(document).on("submit", "#formSearch", function (e) {
         e.preventDefault();
         if ($("#textSearch").val() != "") {
-            document.location.href = "/Buscar?q=" + $("#textSearch").val();
+            document.location.href = url + "?q=" + $("#textSearch").val();
         } else {
             $("#textSearch").css("border-style", "solid");
             $("#textSearch").css("border-color", "rgb(218, 16, 16)");
@@ -109,5 +110,12 @@ $(document).ready(function () {
             $("#textSearch").focus();
         }
     });
-});
 
+    $('#botonBuscador').on('click', function (e) {
+        var $inputSearch = $('#textSearch');
+        setTimeout(function () {
+            $inputSearch.focus();
+        }, 1000);
+
+    });
+});

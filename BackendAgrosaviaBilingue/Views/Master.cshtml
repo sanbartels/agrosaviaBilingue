@@ -1,5 +1,5 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
-    
+
 @using ClientDependency.Core.Mvc
 
 @using Umbraco.Web.PublishedModels
@@ -21,6 +21,10 @@
 
     var home = (Inicio)Model.Root();
     string textSearch = Request.QueryString["q"] != null ? Request.QueryString["q"].Trim() : String.Empty;
+
+    var buscar = (Buscador)home.Children<Buscador>().Where(x => x.IsVisible()).FirstOrDefault();
+
+    string urlBuscador = buscar.Url().TrimEnd('/');
 
 }
 
@@ -95,7 +99,7 @@
                                 }
                             </div>
                         </div>
-                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
+                        <button id="botonBuscador" class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
                                 data-bs-toggle="modal"
                                 data-bs-target="#searchModal">
                             <i class="fas fa-search text-primary"></i>
@@ -115,7 +119,7 @@
                 </div>
                 <div class="modal-body d-flex align-items-center">
                     <div class="input-group w-75 mx-auto d-flex">
-                        <form action="/buscar?q=" id="formSearch">
+                        <form action="/buscar?q=" id="formSearch" style=“width: 80%;”>
                             <input type="search"
                                    id="textSearch"
                                    value="@textSearch"
@@ -174,6 +178,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
     @Html.RenderJsHere()
+
+    <script>
+        $(document).ready(function () {
+            var url = "@urlBuscador";
+           
+            $(document).on("submit", "#formSearch", function (e) {
+                e.preventDefault();
+                if ($("#textSearch").val() != "") {
+                    document.location.href = url+"?q=" + $("#textSearch").val();
+                } else {
+                    $("#textSearch").css("border-style", "solid");
+                    $("#textSearch").css("border-color", "rgb(218, 16, 16)");
+                    $("#textSearch").css("border-width", "0px 0px 1px");
+                    $("#textSearch").focus();
+                }
+            });
+        });
+    </script>
+
     @if (IsSectionDefined("js"))
     {
         @RenderSection("js", false)

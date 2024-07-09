@@ -28,23 +28,21 @@
                         {
                             terms = terms.Where(x => !Lucene.Net.Analysis.StopAnalyzer.ENGLISH_STOP_WORDS_SET.Contains(x.ToLower()) && x.Length > 2).ToArray(); //no distinguimos entre mayus y mins
 
-                            //var camposImportantes = new List<string> { "titulo", "nodeName", "nombreProducto", "categoria", "tituloSeccionEnInicio", "tituloSeccionInterna", "tituloInternoSeccion", "subtituloDescripcion", "nombreEnMenu", "nombreDeLaSeccion" };
+                            // Campos en español
+                            var camposImportantesEs = new List<string> { "titulo", "lema", "nombreDelSitio","tituloPrincipal", "nodeName", "nombreProducto", "categoria", "tituloSeccionEnInicio", "tituloSeccionInterna", "tituloInternoSeccion", "subtituloDescripcion", "nombreEnMenu", "nombreDeLaSeccion", "listadoPqrs" };
+                            var camposImportantesEsSufijo = camposImportantesEs.Select(campo => campo + "_es").ToList();
 
-                            //var camposBusquedaDifusa = new List<string> { "resumenProducto", "descripcionProducto", "contenidoInterno", "descripcionSeccion" };
+                            var camposBusquedaDifusaEs = new List<string> { "resumenProducto", "descripcionProducto", "contenidoInterno", "descripcionSeccion", "pregunta", "respuesta", "subtituloDescripcion", "descripcionSeccion", "listadoPqrs" };
+                            var camposBusquedaDifusaEsSufijo = camposBusquedaDifusaEs.Select(campo => campo + "_es").ToList();
 
+                            // Campos en inglés
+                            var camposImportantesEnSufijo = camposImportantesEs.Select(campo => campo + "_en-us").ToList();
+                            var camposBusquedaDifusaEnSufijo = camposBusquedaDifusaEs.Select(campo => campo + "_en-us").ToList();
 
-                            //List<ISearchResult> resultadosBusqueda = new List<ISearchResult>();
-                            //var searcherAgrosavia = index.GetSearcher();
-                            //var criteria = searcherAgrosavia.CreateQuery(IndexTypes.Content);
+                            // Combinar todas las listas
+                            var camposImportantes = camposImportantesEs.Concat(camposImportantesEsSufijo).Concat(camposImportantesEnSufijo).ToList();
+                            var camposBusquedaDifusa = camposBusquedaDifusaEs.Concat(camposBusquedaDifusaEsSufijo).Concat(camposBusquedaDifusaEnSufijo).ToList();
 
-                            var camposImportantesEs = new List<string> { "titulo", "nodeName", "nombreProducto", "categoria", "tituloSeccionEnInicio", "tituloSeccionInterna", "tituloInternoSeccion", "subtituloDescripcion", "nombreEnMenu", "nombreDeLaSeccion" };
-                            var camposImportantesEn = camposImportantesEs.Select(campo => campo + "_en-us").ToList();
-
-                            var camposBusquedaDifusaEs = new List<string> { "resumenProducto", "descripcionProducto", "contenidoInterno", "descripcionSeccion" };
-                            var camposBusquedaDifusaEn = camposBusquedaDifusaEs.Select(campo => campo + "_en-us").ToList();
-
-                            var camposImportantes = camposImportantesEs.Concat(camposImportantesEn).ToList();
-                            var camposBusquedaDifusa = camposBusquedaDifusaEs.Concat(camposBusquedaDifusaEn).ToList();
 
                             List<ISearchResult> resultadosBusqueda = new List<ISearchResult>();
                             var searcherAgrosavia = index.GetSearcher();
@@ -144,7 +142,7 @@
         <div class="row">
 
             <div class="col-12 no-resultados">
-                <h2>No hay resultados @text</h2>                
+                <h2>@Umbraco.GetDictionaryValue("sin_resultados") @text</h2>                
                 <strong>@palabra</strong>
                 <div class="no-results">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 758 758">
@@ -183,7 +181,7 @@
                                 }
                             </style>
                         </defs>
-                        <title>No Search Results</title>
+                        <title>@Umbraco.GetDictionaryValue("sin_resultados")</title>
                         <g id="face">
                             <g id="Face-2" data-name="Face">
                                 <circle id="face-fill" class="cls-1" cx="256" cy="256" r="246.85" />
@@ -262,85 +260,6 @@
                 if (node.HasValue("nombreProducto"))
                 {
                     retorno = node.GetProperty("nombreProducto").Value().ToString();
-                }
-                else
-                {
-                    if (node.HasValue("nombreCargo"))
-                    {
-                        retorno = node.GetProperty("nombreCargo").Value().ToString();
-                    }
-                    else
-                    {
-                        if (node.HasValue("nombreCategoria"))
-                        {
-                            retorno = node.GetProperty("nombreCategoria").Value().ToString();
-                        }
-                        else
-                        {
-                            if (node.HasValue("nombreColeccion"))
-                            {
-                                retorno = node.GetProperty("nombreColeccion").Value().ToString();
-                            }
-                            else
-                            {
-                                if (node.HasValue("nombreRecurso"))
-                                {
-                                    retorno = node.GetProperty("nombreRecurso").Value().ToString();
-                                }
-                                else
-                                {
-                                    if (node.HasValue("nombreDeLaSeccion"))
-                                    {
-                                        retorno = node.GetProperty("nombreDeLaSeccion").Value().ToString();
-                                    }
-                                    else
-                                    {
-                                        if (node.HasValue("nombreItem"))
-                                        {
-                                            retorno = node.GetProperty("nombreItem").Value().ToString();
-                                        }
-                                        else
-                                        {
-                                            if (node.HasValue("nombreDeLaRed"))
-                                            {
-                                                retorno = node.GetProperty("nombreDeLaRed").Value().ToString();
-                                            }
-                                            else
-                                            {
-                                                if (node.ContentType.Alias == "linkExternoEnMenu")
-                                                {
-                                                    if (node.HasValue("tituloLink"))
-                                                    {
-                                                        retorno = node.GetProperty("tituloLink").Value().ToString();
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    if (node.ContentType.Alias == "contrato")
-                                                    {
-                                                        if (node.HasValue("contenido"))
-                                                        {
-                                                            retorno = node.GetProperty("contenido").Value().ToString().StripHtml();
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        if (node.ContentType.Alias == "nosotros")
-                                                        {
-                                                            if (node.HasValue("nombreEnMenu"))
-                                                            {
-                                                                retorno = node.GetProperty("nombreEnMenu").Value().ToString();
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
