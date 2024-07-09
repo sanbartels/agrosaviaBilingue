@@ -66,6 +66,13 @@ namespace Umbraco.Web.PublishedModels
 		public virtual global::Umbraco.Core.Models.Blocks.BlockListModel ListadoBannersHome => this.Value<global::Umbraco.Core.Models.Blocks.BlockListModel>("listadoBannersHome");
 
 		///<summary>
+		/// Listado promociones
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]
+		[ImplementPropertyType("listadoPromociones")]
+		public virtual global::Umbraco.Core.Models.Blocks.BlockListModel ListadoPromociones => this.Value<global::Umbraco.Core.Models.Blocks.BlockListModel>("listadoPromociones");
+
+		///<summary>
 		/// Nombre del sitio
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.18.0")]

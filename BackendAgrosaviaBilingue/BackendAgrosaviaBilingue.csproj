@@ -364,6 +364,7 @@
     <Compile Include="App_Data\Models\Menu.generated.cs" />
     <Compile Include="App_Data\Models\PQrs.generated.cs" />
     <Compile Include="App_Data\Models\Producto.generated.cs" />
+    <Compile Include="App_Data\Models\ProductoPromocion.generated.cs" />
     <Compile Include="App_Data\Models\Productos.generated.cs" />
     <Compile Include="App_Data\Models\UmbracoMediaArticle.generated.cs" />
     <Compile Include="App_Data\Models\UmbracoMediaAudio.generated.cs" />
