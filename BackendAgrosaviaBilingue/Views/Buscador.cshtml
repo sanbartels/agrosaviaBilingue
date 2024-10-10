@@ -1,6 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
 @using Umbraco.Examine;
 @using BackendAgrosaviaBilingue.Extensions;
+@using System.Globalization;
 @{
     Layout = "Master.cshtml";
     var sectionBuscador = (Buscador)Model;
@@ -22,26 +23,34 @@
                 <div class="row g-4 buscador-inner">
                     @if (!textSearch.IsNullOrWhiteSpace() && ExamineManager.Instance.TryGetIndex("ExternalIndex", out var index))
                     {
+                        var currentCulture = CultureInfo.CurrentCulture.Name; // Obtenemos la cultura actual (es-ES, en-US, etc.)
+                        
+                        // Definimos los sufijos de acuerdo a la cultura
+                        var sufijoActual = currentCulture == "es" ? "_es" : currentCulture == "en-US" ? "_en-us" : "";
+
+                        // Si la cultura no es ninguna de las esperadas, no realizamos búsqueda
+                        if (string.IsNullOrEmpty(sufijoActual))
+                        {
+                            @notResults("La búsqueda no está disponible para la cultura actual", "");
+                            return;
+                        }
+
                         string[] terms = !string.IsNullOrEmpty(textSearch) && textSearch.Contains(" ") ? textSearch.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) : !string.IsNullOrWhiteSpace(textSearch) ? new string[] { textSearch } : null;
 
                         if (terms != null && terms.Any())
                         {
                             terms = terms.Where(x => !Lucene.Net.Analysis.StopAnalyzer.ENGLISH_STOP_WORDS_SET.Contains(x.ToLower()) && x.Length > 2).ToArray(); //no distinguimos entre mayus y mins
 
-                            // Campos en español
-                            var camposImportantesEs = new List<string> { "titulo", "nombre", "textoOferta", "lema", "nombreDelSitio","tituloPrincipal", "nodeName", "nombreProducto", "categoria", "tituloSeccionEnInicio", "tituloSeccionInterna", "tituloInternoSeccion", "subtituloDescripcion", "nombreEnMenu", "nombreDeLaSeccion", "listadoPqrs" };
-                            var camposImportantesEsSufijo = camposImportantesEs.Select(campo => campo + "_es").ToList();
+                            // Filtramos los campos según la cultura actual
+                            var camposImportantes1 = new List<string> { "nodeName", "titulo" }
+                                                    .Select(campo => campo + sufijoActual).ToList();
 
-                            var camposBusquedaDifusaEs = new List<string> { "resumenProducto", "descripcionProducto", "contenidoInterno", "descripcionSeccion", "pregunta", "respuesta", "subtituloDescripcion", "descripcionSeccion", "listadoPqrs" };
-                            var camposBusquedaDifusaEsSufijo = camposBusquedaDifusaEs.Select(campo => campo + "_es").ToList();
+                            var camposImportantes = new List<string> { "nombre", "textoOferta", "lema", "nombreDelSitio", "tituloPrincipal", "nodeName", "nombreProducto", "categoria", "tituloSeccionEnInicio", "tituloSeccionInterna", "tituloInternoSeccion", "subtituloDescripcion", "nombreEnMenu", "nombreDeLaSeccion", "listadoPqrs" }
+                                                            .Select(campo => campo + sufijoActual).ToList();
 
-                            // Campos en inglés
-                            var camposImportantesEnSufijo = camposImportantesEs.Select(campo => campo + "_en-us").ToList();
-                            var camposBusquedaDifusaEnSufijo = camposBusquedaDifusaEs.Select(campo => campo + "_en-us").ToList();
+                            var camposBusquedaDifusa = new List<string> { "resumenProducto", "descripcionProducto", "contenidoInterno", "descripcionSeccion", "pregunta", "respuesta", "subtituloDescripcion", "descripcionSeccion", "listadoPqrs" }
+                                                      .Select(campo => campo + sufijoActual).ToList();
 
-                            // Combinar todas las listas
-                            var camposImportantes = camposImportantesEs.Concat(camposImportantesEsSufijo).Concat(camposImportantesEnSufijo).ToList();
-                            var camposBusquedaDifusa = camposBusquedaDifusaEs.Concat(camposBusquedaDifusaEsSufijo).Concat(camposBusquedaDifusaEnSufijo).ToList();
 
 
                             List<ISearchResult> resultadosBusqueda = new List<ISearchResult>();
@@ -49,7 +58,7 @@
                             var criteria = searcherAgrosavia.CreateQuery(IndexTypes.Content);
 
                             var examineQuery = criteria.GroupedNot(new string[] { "umbracoNaviHide" }, new string[] { "1" }).And(q => q
-                                                                                            .GroupedOr(new[] { "nodeName", "titulo" }, terms.Boost(2f))//Damos prioridad si encontramos en estas propiedades
+                                                                                            .GroupedOr(camposImportantes, terms.Boost(2f))//Damos prioridad si encontramos en estas propiedades
                                                                                             .Or()
                                                                                             .GroupedOr(camposImportantes, terms.Boost(1f))
                                                                                             .Or()
@@ -124,26 +133,25 @@
 @helper notResults(string text, string palabra)
 {
     @*<div class="resultados_no_encontrados">
-        <h4 class="title_no_encontrados">
-            @text
-            <strong>@palabra</strong>
-        </h4>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-player/1.5.7/lottie-player.js"></script>
-        <lottie-player src="https://lottie.host/f4cc90b3-83ac-4f3e-83d8-f3913dfca6a7/oaiF2izYwI.json"
-                       background="transparent"
-                       speed="1"
-                       style="width: 300px; height: 300px"
-                       mode="bounce"
-                       loop
-                       autoplay></lottie-player>
-    </div>*@
+            <h4 class="title_no_encontrados">
+                @text
+                <strong>@palabra</strong>
+            </h4>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-player/1.5.7/lottie-player.js"></script>
+            <lottie-player src="https://lottie.host/f4cc90b3-83ac-4f3e-83d8-f3913dfca6a7/oaiF2izYwI.json"
+                           background="transparent"
+                           speed="1"
+                           style="width: 300px; height: 300px"
+                           mode="bounce"
+                           loop
+                           autoplay></lottie-player>
+        </div>*@
 
     <div id="send-message" class="centered">
         <div class="row">
 
             <div class="col-12 no-resultados">
-                <h2>@Umbraco.GetDictionaryValue("sin_resultados") @text</h2>                
-                <strong>@palabra</strong>
+                <h2>@Umbraco.GetDictionaryValue("sin_resultados") @text <strong>@palabra</strong></h2>                
                 <div class="no-results">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 758 758">
                         <defs>
