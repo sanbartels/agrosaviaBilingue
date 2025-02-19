@@ -52,13 +52,12 @@
                                                       .Select(campo => campo + sufijoActual).ToList();
 
 
-
                             List<ISearchResult> resultadosBusqueda = new List<ISearchResult>();
                             var searcherAgrosavia = index.GetSearcher();
                             var criteria = searcherAgrosavia.CreateQuery(IndexTypes.Content);
 
                             var examineQuery = criteria.GroupedNot(new string[] { "umbracoNaviHide" }, new string[] { "1" }).And(q => q
-                                                                                            .GroupedOr(camposImportantes, terms.Boost(2f))//Damos prioridad si encontramos en estas propiedades
+                                                                                            .GroupedOr(camposImportantes1, terms.Boost(2f))//Damos prioridad si encontramos en estas propiedades
                                                                                             .Or()
                                                                                             .GroupedOr(camposImportantes, terms.Boost(1f))
                                                                                             .Or()
